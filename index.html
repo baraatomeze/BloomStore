@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom - متجر القهوة والهدايا الفاخر</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="config.js"></script>
+</head>
+<body>
+    <!-- مؤشر الأمان -->
+    <div class="security-indicator" id="securityIndicator">
+        <i class="fas fa-shield-alt"></i>
+        <span id="securityText">آمن</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-container">
+                <div class="logo-text">
+                    <span class="company-name">BLOOM</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="ابحث عن المنتجات..." class="search-input">
+                    <button class="search-btn" onclick="searchProducts()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                                 <div class="user-actions">
+                     <button class="cart-btn" onclick="showCart()" type="button">
+                         <i class="fas fa-shopping-cart"></i>
+                         السلة
+                         <span class="cart-count" id="cartCount">0</span>
+                     </button>
+                     <button class="admin-btn" onclick="showAdminPanel()" type="button" id="adminBtn" style="display: none;">
+                         <i class="fas fa-cog"></i>
+                         لوحة الإدارة
+                     </button>
+                     
+                     <button class="login-btn" onclick="showLoginModal()" type="button">
+                         <i class="fas fa-user"></i>
+                         تسجيل الدخول
+                     </button>
+                 </div>
+            </div>
+        </div>
+         </header>
+ 
+     <!-- شريط التصنيفات -->
+     <nav class="categories-nav">
+         <div class="container">
+             <div class="categories-list">
+                 <a href="#home" class="category-link active">الرئيسية</a>
+                 <a href="#categories" class="category-link">التصنيفات</a>
+                 <a href="#products" class="category-link">المنتجات</a>
+                 <a href="#about" class="category-link">من نحن</a>
+                 <a href="#contact" class="category-link">اتصل بنا</a>
+             </div>
+         </div>
+     </nav>
+ 
+     
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                                 <h2>مرحباً بكم في Bloom</h2>
+                 <p>شركة ناشئة متخصصة في تقديم تجارب متكاملة من مشروبات وهدايا وتنسيقات</p>
+                 <p>نقدم تجارب راقية تلامس المشاعر، عبر تنسيق بصري متكامل في الهدايا، النكهات، والمناسبات</p>
+                 <button class="cta-btn" onclick="scrollToProducts()">تسوق الآن</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">أصناف المنتجات</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterByCategory('أكواب')">
+                    <i class="fas fa-mug-hot"></i>
+                    <h3>أكواب</h3>
+                    <p>أكواب فاخرة ومميزة</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('مشروبات باردة')">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <h3>مشروبات باردة</h3>
+                    <p>مشروبات منعشة وباردة</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('مشروبات ساخنة')">
+                    <i class="fas fa-coffee"></i>
+                    <h3>مشروبات ساخنة</h3>
+                    <p>مشروبات ساخنة ومريحة</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('بوكسات حفلات')">
+                    <i class="fas fa-gift"></i>
+                    <h3>بوكسات حفلات</h3>
+                    <p>هدايا مميزة للحفلات</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('تنظيم حفلات')">
+                    <i class="fas fa-birthday-cake"></i>
+                    <h3>تنظيم حفلات</h3>
+                    <p>خدمات تنظيم الحفلات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">المنتجات</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- المنتجات ستتم إضافتها ديناميكياً -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">من نحن</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>شركة ناشئة متخصصة في تقديم تجارب متكاملة من مشروبات وهدايا وتنسيقات</p>
+                    <p>نقدم تجارب راقية تلامس المشاعر، عبر تنسيق بصري متكامل في الهدايا، النكهات، والمناسبات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Bloom.co.ps@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>0000000000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <p>&copy; 2024 Bloom. جميع الحقوق محفوظة</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>سلة التسوق</h3>
+                <button class="close-btn" onclick="closeCart()" type="button">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems">
+                    <!-- عناصر السلة ستتم إضافتها ديناميكياً -->
+                </div>
+                <div class="cart-total">
+                    <h4>المجموع: <span id="cartTotal">0</span> شيكل</h4>
+                </div>
+                <button class="checkout-btn" onclick="checkout()" type="button">إتمام الطلب</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تسجيل الدخول</h3>
+                <button class="close-btn" onclick="closeLoginModal()" type="button">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="login-tabs">
+                    <button class="tab-btn active" onclick="showTab('login')">تسجيل الدخول</button>
+                    <button class="tab-btn" onclick="showTab('register')">حساب جديد</button>
+    
+                </div>
+                
+                                 <!-- Login Tab -->
+                 <div id="loginTab" class="tab-content active">
+                     <form id="loginForm" onsubmit="handleLogin(event)">
+                         <div class="form-group">
+                             <label for="loginEmail">البريد الإلكتروني</label>
+                             <input type="email" id="loginEmail" required>
+                         </div>
+                         <div class="form-group">
+                             <label for="loginPassword">كلمة المرور</label>
+                             <input type="password" id="loginPassword" required>
+                         </div>
+                         
+                          <button type="submit" class="btn-login-submit">تسجيل الدخول</button>
+                          <button type="button" class="btn-clear-data" onclick="clearStoredData()">مسح البيانات المحفوظة</button>
+                     </form>
+                 </div>
+
+                <!-- Register Tab -->
+                <div id="registerTab" class="tab-content">
+                    <form id="registerForm" onsubmit="handleRegister(event)">
+                        <div class="form-group">
+                            <label for="registerName">الاسم الكامل</label>
+                            <input type="text" id="registerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPhone">رقم الهاتف</label>
+                            <input type="tel" id="registerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">البريد الإلكتروني</label>
+                            <input type="email" id="registerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">كلمة المرور</label>
+                            <input type="password" id="registerPassword" required>
+                            <small class="password-requirements">
+                                <strong>متطلبات كلمة المرور:</strong><br>
+                                • 8 أحرف على الأقل<br>
+                                • أحرف إنجليزية (a-z, A-Z)<br>
+                                • أرقام (0-9)<br>
+                                • رموز خاصة (!@#$%^&*)
+                            </small>
+                        </div>
+                        <button type="submit" class="btn-login-submit">إنشاء حساب</button>
+                    </form>
+                </div>
+
+                                 
+                             <small>يمكنك تسجيل الدخول باستخدام حساب جوجل الخاص بك</small>
+                         </p>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2FA Modal -->
+    <div class="modal" id="twoFAModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>المصادقة الثنائية - WhatsApp</h3>
+                <button class="close-btn" onclick="close2FA()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- سيتم ملؤ هذا القسم ديناميكياً -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Admin Panel Modal -->
+    <div class="modal" id="adminPanelModal">
+        <div class="modal-content admin-modal">
+            <div class="modal-header">
+                <h3>لوحة الإدارة</h3>
+                <button class="close-btn" onclick="closeAdminPanel()" type="button">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" onclick="showAdminTab('orders')">
+                        <i class="fas fa-shopping-bag"></i>
+                        الطلبات
+                    </button>
+                    <button class="tab-btn" onclick="showAdminTab('products')">
+                        <i class="fas fa-box"></i>
+                        المنتجات
+                    </button>
+                    <button class="tab-btn" onclick="showAdminTab('users')">
+                        <i class="fas fa-users"></i>
+                        المستخدمين
+                    </button>
+                    <button class="tab-btn" onclick="showAdminTab('stats')">
+                        <i class="fas fa-chart-line"></i>
+                        الإحصائيات
+                    </button>
+                </div>
+                
+                <div class="admin-content">
+                    <div id="ordersTab" class="tab-content active">
+                        <div class="tab-header">
+                            <h3>إدارة الطلبات</h3>
+                            <div class="tab-actions">
+                                <button class="btn-refresh" onclick="refreshOrders()">
+                                    <i class="fas fa-sync-alt"></i>
+                                    تحديث
+                                </button>
+                            </div>
+                        </div>
+                        <div id="ordersList">
+                            <p>لا توجد طلبات حالياً</p>
+                        </div>
+                    </div>
+                    
+                    <div id="productsTab" class="tab-content">
+                        <div class="tab-header">
+                            <h3>إدارة المنتجات</h3>
+                            <div class="tab-actions">
+                                <button class="btn-add" onclick="showAddProductModal()">
+                                    <i class="fas fa-plus"></i>
+                                    إضافة منتج
+                                </button>
+                            </div>
+                        </div>
+                        <div id="productsList">
+                            <p>لا توجد منتجات حالياً</p>
+                        </div>
+                    </div>
+                    
+                    <div id="usersTab" class="tab-content">
+                        <div class="tab-header">
+                            <h3>إدارة المستخدمين</h3>
+                            <div class="tab-actions">
+                                <button class="btn-add" onclick="showAddUserModal()">
+                                    <i class="fas fa-user-plus"></i>
+                                    إضافة مستخدم
+                                </button>
+                            </div>
+                        </div>
+                        <div id="usersList">
+                            <p>لا توجد مستخدمين حالياً</p>
+                        </div>
+                    </div>
+                    
+                                         <div id="statsTab" class="tab-content">
+                         <div class="tab-header">
+                             <h3>الإحصائيات</h3>
+                         </div>
+                         <div id="statsContent">
+                             <p>جاري تحميل الإحصائيات...</p>
+                         </div>
+                         
+                         <!-- عداد الزوار في لوحة الإدارة -->
+                         <div class="visitor-stats-panel">
+                             <h4>إحصائيات الزوار</h4>
+                             <div class="visitor-stats-grid">
+                                 <div class="visitor-stat-card">
+                                     <i class="fas fa-users"></i>
+                                     <div class="stat-info">
+                                         <span class="stat-label">الزوار الحاليون</span>
+                                         <span class="stat-value" id="currentVisitors">0</span>
+                                     </div>
+                                 </div>
+                                 <div class="visitor-stat-card">
+                                     <i class="fas fa-user"></i>
+                                     <div class="stat-info">
+                                         <span class="stat-label">المستخدمون النشطون</span>
+                                         <span class="stat-value" id="activeUsers">0</span>
+                                     </div>
+                                 </div>
+                                 <div class="visitor-stat-card">
+                                     <i class="fas fa-eye"></i>
+                                     <div class="stat-info">
+                                         <span class="stat-label">إجمالي المشاهدات</span>
+                                         <span class="stat-value" id="totalViews">0</span>
+                                     </div>
+                                 </div>
+                                 <div class="visitor-stat-card">
+                                     <i class="fas fa-chart-line"></i>
+                                     <div class="stat-info">
+                                         <span class="stat-label">إجمالي الزوار</span>
+                                         <span class="stat-value" id="totalVisitors">0</span>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
